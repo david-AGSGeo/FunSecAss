@@ -12,6 +12,8 @@ namespace FunSecAss
 {
     public partial class Form1 : Form
     {
+        private Encryptor myEncryptor;
+
         public Form1()
         {
             InitializeComponent();
@@ -21,8 +23,9 @@ namespace FunSecAss
         {
             string userName = userNameTextBox.Text;
             string password = passwordTextBox.Text;
+            myEncryptor = new Encryptor();
 
-            ASreplyTextBox.Text = password;
+            ASreplyTextBox.Text = myEncryptor.Encrypt();
         }
 
         private void hidePasswordCheckbox_CheckedChanged(object sender, EventArgs e)
