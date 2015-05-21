@@ -28,186 +28,200 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.requestAuthenticationButton = new System.Windows.Forms.Button();
+            this.userNameTextBox = new System.Windows.Forms.TextBox();
+            this.passwordTextBox = new System.Windows.Forms.TextBox();
+            this.userNameLabel = new System.Windows.Forms.Label();
+            this.passwordLabel = new System.Windows.Forms.Label();
+            this.ASreplyTextBox = new System.Windows.Forms.TextBox();
+            this.ASreplyLabel = new System.Windows.Forms.Label();
+            this.ticketTextBox = new System.Windows.Forms.TextBox();
+            this.KtgsTextBox = new System.Windows.Forms.TextBox();
+            this.ticketLabel = new System.Windows.Forms.Label();
+            this.KtgsLabel = new System.Windows.Forms.Label();
+            this.plaintextTextBox = new System.Windows.Forms.TextBox();
+            this.TGSLabel = new System.Windows.Forms.Label();
+            this.encryptedKtgsTextBox = new System.Windows.Forms.TextBox();
+            this.plaintextLabel = new System.Windows.Forms.Label();
+            this.encryptedKtgsLabel = new System.Windows.Forms.Label();
+            this.hidePasswordCheckbox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
-            // button1
+            // requestAuthenticationButton
             // 
-            this.button1.Location = new System.Drawing.Point(12, 66);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(175, 30);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Request Authentication";
-            this.button1.UseVisualStyleBackColor = true;
+            this.requestAuthenticationButton.Location = new System.Drawing.Point(12, 90);
+            this.requestAuthenticationButton.Name = "requestAuthenticationButton";
+            this.requestAuthenticationButton.Size = new System.Drawing.Size(175, 30);
+            this.requestAuthenticationButton.TabIndex = 0;
+            this.requestAuthenticationButton.Text = "Request Authentication";
+            this.requestAuthenticationButton.UseVisualStyleBackColor = true;
+            this.requestAuthenticationButton.Click += new System.EventHandler(this.requestAuthenticationButton_Click);
             // 
-            // textBox1
+            // userNameTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(87, 10);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 1;
+            this.userNameTextBox.Location = new System.Drawing.Point(87, 10);
+            this.userNameTextBox.Name = "userNameTextBox";
+            this.userNameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.userNameTextBox.TabIndex = 1;
             // 
-            // textBox2
+            // passwordTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(87, 36);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 2;
+            this.passwordTextBox.Location = new System.Drawing.Point(87, 36);
+            this.passwordTextBox.Name = "passwordTextBox";
+            this.passwordTextBox.Size = new System.Drawing.Size(100, 20);
+            this.passwordTextBox.TabIndex = 2;
+            this.passwordTextBox.PasswordChar = '*';
             // 
-            // label1
+            // userNameLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "User Name:";
+            this.userNameLabel.AutoSize = true;
+            this.userNameLabel.Location = new System.Drawing.Point(18, 13);
+            this.userNameLabel.Name = "userNameLabel";
+            this.userNameLabel.Size = new System.Drawing.Size(63, 13);
+            this.userNameLabel.TabIndex = 3;
+            this.userNameLabel.Text = "User Name:";
             // 
-            // label2
+            // passwordLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 38);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Password";
+            this.passwordLabel.AutoSize = true;
+            this.passwordLabel.Location = new System.Drawing.Point(18, 38);
+            this.passwordLabel.Name = "passwordLabel";
+            this.passwordLabel.Size = new System.Drawing.Size(53, 13);
+            this.passwordLabel.TabIndex = 4;
+            this.passwordLabel.Text = "Password";
             // 
-            // textBox3
+            // ASreplyTextBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(12, 127);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(175, 56);
-            this.textBox3.TabIndex = 5;
+            this.ASreplyTextBox.Location = new System.Drawing.Point(12, 151);
+            this.ASreplyTextBox.Multiline = true;
+            this.ASreplyTextBox.Name = "ASreplyTextBox";
+            this.ASreplyTextBox.ReadOnly = true;
+            this.ASreplyTextBox.Size = new System.Drawing.Size(175, 56);
+            this.ASreplyTextBox.TabIndex = 5;
             // 
-            // label3
+            // ASreplyLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 111);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(162, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Reply from Authentication Server";
+            this.ASreplyLabel.AutoSize = true;
+            this.ASreplyLabel.Location = new System.Drawing.Point(9, 135);
+            this.ASreplyLabel.Name = "ASreplyLabel";
+            this.ASreplyLabel.Size = new System.Drawing.Size(162, 13);
+            this.ASreplyLabel.TabIndex = 6;
+            this.ASreplyLabel.Text = "Reply from Authentication Server";
             // 
-            // textBox4
+            // ticketTextBox
             // 
-            this.textBox4.Location = new System.Drawing.Point(87, 191);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 7;
-      
+            this.ticketTextBox.Location = new System.Drawing.Point(87, 215);
+            this.ticketTextBox.Name = "ticketTextBox";
+            this.ticketTextBox.ReadOnly = true;
+            this.ticketTextBox.Size = new System.Drawing.Size(100, 20);
+            this.ticketTextBox.TabIndex = 7;
             // 
-            // textBox5
+            // KtgsTextBox
             // 
-            this.textBox5.Location = new System.Drawing.Point(87, 217);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 8;
+            this.KtgsTextBox.Location = new System.Drawing.Point(87, 241);
+            this.KtgsTextBox.Name = "KtgsTextBox";
+            this.KtgsTextBox.ReadOnly = true;
+            this.KtgsTextBox.Size = new System.Drawing.Size(100, 20);
+            this.KtgsTextBox.TabIndex = 8;
             // 
-            // label4
+            // ticketLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(18, 194);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(40, 13);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Ticket:";
-       
+            this.ticketLabel.AutoSize = true;
+            this.ticketLabel.Location = new System.Drawing.Point(18, 218);
+            this.ticketLabel.Name = "ticketLabel";
+            this.ticketLabel.Size = new System.Drawing.Size(40, 13);
+            this.ticketLabel.TabIndex = 9;
+            this.ticketLabel.Text = "Ticket:";
             // 
-            // label5
+            // KtgsLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(18, 220);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(52, 13);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Key Ktgs:";
+            this.KtgsLabel.AutoSize = true;
+            this.KtgsLabel.Location = new System.Drawing.Point(18, 244);
+            this.KtgsLabel.Name = "KtgsLabel";
+            this.KtgsLabel.Size = new System.Drawing.Size(52, 13);
+            this.KtgsLabel.TabIndex = 10;
+            this.KtgsLabel.Text = "Key Ktgs:";
             // 
-            // textBox6
+            // plaintextTextBox
             // 
-            this.textBox6.Location = new System.Drawing.Point(12, 278);
-            this.textBox6.Multiline = true;
-            this.textBox6.Name = "textBox6";
-            this.textBox6.ReadOnly = true;
-            this.textBox6.Size = new System.Drawing.Size(175, 41);
-            this.textBox6.TabIndex = 11;
+            this.plaintextTextBox.Location = new System.Drawing.Point(12, 302);
+            this.plaintextTextBox.Multiline = true;
+            this.plaintextTextBox.Name = "plaintextTextBox";
+            this.plaintextTextBox.ReadOnly = true;
+            this.plaintextTextBox.Size = new System.Drawing.Size(175, 41);
+            this.plaintextTextBox.TabIndex = 11;
             // 
-            // label6
+            // TGSLabel
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 247);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(172, 13);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "Message to Ticket Granting Server";
-
+            this.TGSLabel.AutoSize = true;
+            this.TGSLabel.Location = new System.Drawing.Point(12, 271);
+            this.TGSLabel.Name = "TGSLabel";
+            this.TGSLabel.Size = new System.Drawing.Size(172, 13);
+            this.TGSLabel.TabIndex = 12;
+            this.TGSLabel.Text = "Message to Ticket Granting Server";
             // 
-            // textBox7
+            // encryptedKtgsTextBox
             // 
-            this.textBox7.Location = new System.Drawing.Point(12, 339);
-            this.textBox7.Multiline = true;
-            this.textBox7.Name = "textBox7";
-            this.textBox7.ReadOnly = true;
-            this.textBox7.Size = new System.Drawing.Size(175, 47);
-            this.textBox7.TabIndex = 13;
+            this.encryptedKtgsTextBox.Location = new System.Drawing.Point(12, 363);
+            this.encryptedKtgsTextBox.Multiline = true;
+            this.encryptedKtgsTextBox.Name = "encryptedKtgsTextBox";
+            this.encryptedKtgsTextBox.ReadOnly = true;
+            this.encryptedKtgsTextBox.Size = new System.Drawing.Size(175, 47);
+            this.encryptedKtgsTextBox.TabIndex = 13;
             // 
-            // label7
+            // plaintextLabel
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(9, 262);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(47, 13);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "Plaintext";
+            this.plaintextLabel.AutoSize = true;
+            this.plaintextLabel.Location = new System.Drawing.Point(9, 286);
+            this.plaintextLabel.Name = "plaintextLabel";
+            this.plaintextLabel.Size = new System.Drawing.Size(47, 13);
+            this.plaintextLabel.TabIndex = 14;
+            this.plaintextLabel.Text = "Plaintext";
             // 
-            // label8
+            // encryptedKtgsLabel
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(9, 323);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(101, 13);
-            this.label8.TabIndex = 15;
-            this.label8.Text = "Encrypted with Ktgs";
+            this.encryptedKtgsLabel.AutoSize = true;
+            this.encryptedKtgsLabel.Location = new System.Drawing.Point(9, 347);
+            this.encryptedKtgsLabel.Name = "encryptedKtgsLabel";
+            this.encryptedKtgsLabel.Size = new System.Drawing.Size(101, 13);
+            this.encryptedKtgsLabel.TabIndex = 15;
+            this.encryptedKtgsLabel.Text = "Encrypted with Ktgs";
+            // 
+            // hidePasswordCheckbox
+            // 
+            this.hidePasswordCheckbox.AutoSize = true;
+            this.hidePasswordCheckbox.Checked = true;
+            this.hidePasswordCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.hidePasswordCheckbox.Location = new System.Drawing.Point(87, 62);
+            this.hidePasswordCheckbox.Name = "hidePasswordCheckbox";
+            this.hidePasswordCheckbox.Size = new System.Drawing.Size(97, 17);
+            this.hidePasswordCheckbox.TabIndex = 16;
+            this.hidePasswordCheckbox.Text = "Hide Password";
+            this.hidePasswordCheckbox.UseVisualStyleBackColor = true;
+            this.hidePasswordCheckbox.CheckedChanged += new System.EventHandler(this.hidePasswordCheckbox_CheckedChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(762, 528);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.hidePasswordCheckbox);
+            this.Controls.Add(this.encryptedKtgsLabel);
+            this.Controls.Add(this.plaintextLabel);
+            this.Controls.Add(this.encryptedKtgsTextBox);
+            this.Controls.Add(this.TGSLabel);
+            this.Controls.Add(this.plaintextTextBox);
+            this.Controls.Add(this.KtgsLabel);
+            this.Controls.Add(this.ticketLabel);
+            this.Controls.Add(this.KtgsTextBox);
+            this.Controls.Add(this.ticketTextBox);
+            this.Controls.Add(this.ASreplyLabel);
+            this.Controls.Add(this.ASreplyTextBox);
+            this.Controls.Add(this.passwordLabel);
+            this.Controls.Add(this.userNameLabel);
+            this.Controls.Add(this.passwordTextBox);
+            this.Controls.Add(this.userNameTextBox);
+            this.Controls.Add(this.requestAuthenticationButton);
             this.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.MaximizeBox = false;
             this.Name = "Form1";
@@ -219,22 +233,23 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button requestAuthenticationButton;
+        private System.Windows.Forms.TextBox userNameTextBox;
+        private System.Windows.Forms.TextBox passwordTextBox;
+        private System.Windows.Forms.Label userNameLabel;
+        private System.Windows.Forms.Label passwordLabel;
+        private System.Windows.Forms.TextBox ASreplyTextBox;
+        private System.Windows.Forms.Label ASreplyLabel;
+        private System.Windows.Forms.TextBox ticketTextBox;
+        private System.Windows.Forms.TextBox KtgsTextBox;
+        private System.Windows.Forms.Label ticketLabel;
+        private System.Windows.Forms.Label KtgsLabel;
+        private System.Windows.Forms.TextBox plaintextTextBox;
+        private System.Windows.Forms.Label TGSLabel;
+        private System.Windows.Forms.TextBox encryptedKtgsTextBox;
+        private System.Windows.Forms.Label plaintextLabel;
+        private System.Windows.Forms.Label encryptedKtgsLabel;
+        private System.Windows.Forms.CheckBox hidePasswordCheckbox;
     }
 }
 
