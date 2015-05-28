@@ -10,6 +10,8 @@ namespace FunSecAss
 {
     class AuthServer : Server
     {
+        string ticket = "";
+        string keyTGS = "";
 
         public AuthServer() : base(){}
 
@@ -54,6 +56,8 @@ namespace FunSecAss
                     line = line.Trim();
                     if(line == password)
                     {
+                        generateTicket();
+                        generateKeyTGS();
                         //encrypt();
                         
                     }
@@ -76,5 +80,19 @@ namespace FunSecAss
             
             return 0;
         }
-    }
+
+        public void generateTicket()
+        {
+            ticket = keyGenerator();           
+
+            Console.WriteLine(ticket);
+        }
+
+        public void generateKeyTGS()
+        {
+            keyTGS = keyGenerator();
+
+            Console.WriteLine(keyTGS);
+        }
+    }    
 }

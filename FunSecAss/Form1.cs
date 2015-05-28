@@ -72,5 +72,10 @@ namespace FunSecAss
             textBox1.Text += myAuthServer.myDecryptor.Decrypt(s, "testing1");
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            myAuthServer.keyGenerator();
+        }
+
     }
 }
