@@ -25,9 +25,14 @@ namespace FunSecAss
 
             
             DivideToBlocks(message);
-            ShiftRows(3);
-            BytePboxDecrypt();
 
+            //XorWithKey(8, key);
+
+            MixColumns();
+            
+            ShiftRows(3);
+            
+            BytePboxDecrypt();
 
             PTblockList = ENCblockList;
             return blockListToString();
@@ -86,6 +91,47 @@ namespace FunSecAss
                     temp[i] = block[((i + (8-numShifts)) % 8)];
                 }
                 TempblockList.Add(temp);
+            }
+            ENCblockList = TempblockList;
+        }
+
+        private void MixColumns()
+        {
+
+        }
+
+        private void XorWithKey(int iterations, string key)
+        {
+            List<char[]> SubKeyList = new List<char[]>();
+            List<char[]> TempblockList = new List<char[]>();
+            char[] shortKey1, shortKey2, tempShortKey;
+            shortKey1 = key.Remove(4,4).ToCharArray();
+            shortKey2 = key.Remove(0, 4).ToCharArray();
+            tempShortKey = new char[4];
+            
+            for (int i = 0; i < iterations; i++)
+            {
+                //char[] tempKey = shortKey1 + shortKey2;
+                char[] tempKey = shortKey1.Concat(shortKey2).ToArray();
+
+                for (int j = 0; j < 4; j++) 
+                    tempShortKey[j] = (char)(shortKey1[j] ^ shortKey2[j]);
+
+                shortKey1 = shortKey2;
+                shortKey2 = tempShortKey;
+
+                SubKeyList.Add(tempKey);
+            }
+
+            foreach (char[] block in ENCblockList)
+            {
+                char[] tempBlock = new char[8];
+                foreach (char[] Subkey in SubKeyList)
+                {
+                    for (int j = 0; j < 8; j++)
+                        tempBlock[j] = (char)(block[j] ^ Subkey[j]);
+                }
+                TempblockList.Add(tempBlock);
             }
             ENCblockList = TempblockList;
         }
