@@ -48,6 +48,7 @@ namespace FunSecAss
                     AuthCheck.Close();
                     if(!userExists)
                     {
+                        AuthRequest.Close();
                         return -1;
                     }
                 }
@@ -61,15 +62,13 @@ namespace FunSecAss
                         generateKeyTGS();
                         writeTicketKeyTGSToFile();
                         encryptMessage(password);
-                        writeEncrytedToFile();
-                        
+                        writeEncrytedToFile();                       
                     }
                     else
                     {
                         AuthRequest.Close();
-                        return -2; // pasword incorrect
+                        return -2; // password incorrect
                     }
-                    //password = line;
                 }
                 else
                 {
@@ -87,15 +86,11 @@ namespace FunSecAss
         public void generateTicket()
         {
             ticket = keyGenerator();           
-
-            Console.WriteLine(ticket);
         }
 
         public void generateKeyTGS()
         {
             keyTGS = keyGenerator();
-
-            Console.WriteLine(keyTGS);
         }
 
         public void writeTicketKeyTGSToFile()
