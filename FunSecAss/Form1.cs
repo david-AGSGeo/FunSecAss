@@ -13,6 +13,7 @@ namespace FunSecAss
     public partial class Form1 : Form
     {
         private AuthServer myAuthServer;
+        private TicketGrantingServer myTicketGrantingServer;
         private Encryptor myEncryptor;
         private Decryptor myDecryptor;
         
@@ -20,6 +21,7 @@ namespace FunSecAss
         {
             InitializeComponent();
             myAuthServer = new AuthServer();
+            myTicketGrantingServer = new TicketGrantingServer();
             myEncryptor = new Encryptor();
             myDecryptor = new Decryptor();
         }
@@ -42,8 +44,11 @@ namespace FunSecAss
                 case 0:
                     //ASreplyTextBox.Text = "Success";
                     //getAuthReply();
-                     string authReply = myDecryptor.Decrypt(getAuthReply(), password);
-                     splitAuthReply(authReply);
+                    string authReply = myDecryptor.Decrypt(getAuthReply(), password);
+                    splitAuthReply(authReply);
+                    encrypt();
+                    string DecryptedTGSReply = myDecryptor.Decrypt(getTGSReply(), KtgsTextBox.Text);
+                    showTGSReply(DecryptedTGSReply);                        
                     break;
                 case -1:
                     ASreplyTextBox.Text = "User Name doesn't exist";
@@ -55,7 +60,6 @@ namespace FunSecAss
                     ASreplyTextBox.Text = "File corrupted";
                     break;
             }
-            
             //ASreplyTextBox.Text = myAuthServer.authenticate().ToString();
 
             ////ASreplyTextBox.Text = password;
@@ -120,10 +124,10 @@ namespace FunSecAss
             if (authReply.StartsWith("Ticket: "))
             {
                 temp = authReply;
-                Console.WriteLine(temp); ;
+                
                 temp1 = authReply;
                 temp = temp.Remove(0, 8);
-                temp = temp.Remove(9, 23);
+                temp = temp.Remove(9, temp.Length-9);
                 ticket = temp;
                 ticketTextBox.Text = ticket;
                 temp1 = temp1.Remove(0, 17);
@@ -135,16 +139,78 @@ namespace FunSecAss
                 }
                 else
                 {
-                    keyTGS = "error";
-                    Console.WriteLine("error");
+                    ticketTextBox.Text = "error";
+                    KtgsTextBox.Text = "error";
                 }
             }
             else
             {
-                ticket = "error";
-                Console.WriteLine("error");
+                ticketTextBox.Text = "error";
+                KtgsTextBox.Text = "error";
             }
         }
 
+        public void encrypt()
+        {
+            string message = "";
+            string encryptedMessage = "";
+            DateTime timestamp;
+
+            timestamp = DateTime.Now;
+
+            message += "Ticket: ";
+            message += ticketTextBox.Text;
+            message += " Timestamp: ";
+            message += System.DateTime.Now;
+            message += " Server Name: ";
+            message += "MailServer";
+
+            plaintextTextBox.Text = message;
+
+            encryptedMessage = myEncryptor.Encrypt(message, KtgsTextBox.Text);
+            encryptedKtgsTextBox.Text = encryptedMessage;
+            writeEncryptedToFile(encryptedMessage);
+        }   
+    
+        public void writeEncryptedToFile(string encryptedMessage)
+        {
+            using (System.IO.StreamWriter TGSRequest = new System.IO.StreamWriter(@"TGSRequest.txt"))
+            {
+                TGSRequest.WriteLine("Encrypted Message: " + encryptedMessage);
+                TGSRequest.Close();
+            }
+        }
+
+        public string getTGSReply()
+        {
+            string line = "";
+            string error = "error";
+
+            myTicketGrantingServer.respondToClient();
+
+            System.IO.StreamReader TGSReply = new System.IO.StreamReader(@"TGSReply.txt");
+            while ((line = TGSReply.ReadLine()) != null)
+            {
+                if (line.StartsWith("Encrypted Message: "))
+                {
+                    line = line.Remove(0, 19);
+                    textBox2.Text = line;
+                    return line;
+                }
+                else
+                {
+                    textBox2.Text = "error";
+                    TGSReply.Close();
+                    return error;
+                }
+            }
+            TGSReply.Close();
+            return error;
+        }
+
+        public void showTGSReply(string tgsReply)
+        {
+            textBox3.Text = tgsReply;
+        }
     }
 }
