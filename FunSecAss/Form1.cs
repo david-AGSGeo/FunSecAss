@@ -70,5 +70,10 @@ namespace FunSecAss
             textBox1.Text = myAuthServer.myEncryptor.Encrypt("hello world, this is my test message", "testing1");
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            myAuthServer.keyGenerator();
+        }
+
     }
 }
