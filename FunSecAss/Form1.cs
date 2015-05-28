@@ -24,7 +24,7 @@ namespace FunSecAss
         {
             string userName = userNameTextBox.Text;
             string password = passwordTextBox.Text;
-            myEncryptor = new Encryptor();
+            //myEncryptor = new Encryptor();
 
             using (System.IO.StreamWriter AuthRequest = new System.IO.StreamWriter(@"AuthRequest.txt"))
             {
