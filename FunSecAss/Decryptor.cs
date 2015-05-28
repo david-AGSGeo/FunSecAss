@@ -24,16 +24,18 @@ namespace FunSecAss
         {
 
             
-            DividToBlocks(message);
-            
+            DivideToBlocks(message);
+            ShiftRows(3);
             BytePboxDecrypt();
 
+
+            PTblockList = ENCblockList;
             return blockListToString();
         }
 
 
 
-        private void DividToBlocks(string message)
+        private void DivideToBlocks(string message)
         {
             int i = 0, j = 0;
 
@@ -59,7 +61,7 @@ namespace FunSecAss
 
         private void BytePboxDecrypt()
         {
-            
+            List<char[]> TempblockList = new List<char[]>();
             foreach (char[] block in ENCblockList)
             {
                 Console.WriteLine(block);
@@ -68,9 +70,24 @@ namespace FunSecAss
                 {
                    temp[j] = block[DecBytePbox[j]];
                 }
-                PTblockList.Add(temp);              
+                TempblockList.Add(temp);              
             }
+            ENCblockList = TempblockList;
+        }
 
+        private void ShiftRows(int numShifts)
+        {
+            List<char[]> TempblockList = new List<char[]>();
+            foreach (char[] block in ENCblockList)
+            {
+                char[] temp = new char[8];
+                for (int i = 0; i < 8; i++)
+                {
+                    temp[i] = block[((i + (8-numShifts)) % 8)];
+                }
+                TempblockList.Add(temp);
+            }
+            ENCblockList = TempblockList;
         }
 
         private string blockListToString()
