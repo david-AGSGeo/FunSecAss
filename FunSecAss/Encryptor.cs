@@ -8,64 +8,69 @@ using System.IO;
 
 namespace FunSecAss
 {
-	class Encryptor
+	public class Encryptor
 	{
-		public string Message = "hello world, this is my test message";
+		
         //public string Key;
         private List<char[]> blockList;
         private static readonly int[] EncBytePbox = {3,5,1,4,7,0,2,6};
         private static readonly int[] EncColumnPbox = {2,0,3,1};
 
-  
-        
-        public string Encrypt()
+        public Encryptor()
         {
             blockList = new List<char[]>();
-            string Encrypted = "";
-            DividToBlocks();
-            Console.WriteLine(blockList.ElementAt(0));
-            //BytePboxEncrypt();
+        }
+        
+        public string Encrypt(string message, string key)
+        {
+            
+            //string Encrypted = "";
+            DividToBlocks(message);
+            //Console.WriteLine(blockList.ElementAt(0));
+            BytePboxEncrypt();
 
-            Encrypted = Message;
-
-            return Encrypted;
+            return message;
         }
 
-        private void DividToBlocks()
+        private void DividToBlocks(string message)
         {
             int i = 0, j = 0;
-            char[] temp = new char[8];
-           // blockList = new List<char[]>();
+
+            blockList.Clear();
+            
             do
             {
-
+                char[] temp = new char[8];
                 for (i = 0; i < 8; i++)
                 {
-                    if (i + (j * 8) < Message.Length)
-                        temp[i] = Message[i + (j * 8)];
+                    if (i + (j * 8) < message.Length)
+                        temp[i] = message[i + (j * 8)];
                     else
                         temp[i] = '*';
                 }
-                blockList.Add(temp);
-                Console.WriteLine(blockList.ElementAt(j));
+                blockList.Add(null);
+                blockList[j] = temp;
+                //Console.WriteLine(blockList.ElementAt(j));
                 j++;
             }
-            while ((j * i) < Message.Length);
+            while ((j * i) < message.Length);
+
+
         }
 
         private void BytePboxEncrypt()
         {
             char[] temp = new char[8];
-            for (int i = 0; i < blockList.Count; i++)
+            foreach (char[] block in blockList)
             {
-                   temp = blockList.ElementAt(i);
+                   temp = block;
                    Console.WriteLine(temp);
-                //for(int j = 0; j < 8; j++)
-               // {
-               //     temp = block;
-              //      block[j] = temp[EncBytePbox[j]];
-              //  }
-                
+                for(int j = 0; j < 8; j++)
+                {
+                    temp = block;
+                    block[j] = temp[EncBytePbox[j]];
+                }
+                Console.WriteLine(block);
             }
 
         }
