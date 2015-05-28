@@ -59,6 +59,7 @@ namespace FunSecAss
                     }
                     else
                     {
+                        AuthRequest.Close();
                         return -2; // pasword incorrect
                     }
                     //password = line;

@@ -48,7 +48,6 @@ namespace FunSecAss
                     ASreplyTextBox.Text = "File corrupted";
                     break;
             }
-            plaintextTextBox.Text = myAuthServer.myEncryptor.Encrypt("hello world, this is my test message", "testing1");
             //ASreplyTextBox.Text = myAuthServer.authenticate().ToString();
 
             //ASreplyTextBox.Text = password;
@@ -68,7 +67,7 @@ namespace FunSecAss
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            textBox1.Text = myAuthServer.myEncryptor.Encrypt("hello world, this is my test message", "testing1");
         }
 
     }

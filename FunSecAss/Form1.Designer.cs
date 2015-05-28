@@ -46,6 +46,7 @@
             this.encryptedKtgsLabel = new System.Windows.Forms.Label();
             this.hidePasswordCheckbox = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // requestAuthenticationButton
@@ -203,7 +204,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(231, 124);
+            this.button1.Location = new System.Drawing.Point(231, 10);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(491, 342);
             this.button1.TabIndex = 17;
@@ -211,11 +212,21 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(231, 383);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(491, 115);
+            this.textBox1.TabIndex = 18;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(762, 528);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.hidePasswordCheckbox);
             this.Controls.Add(this.encryptedKtgsLabel);
@@ -263,6 +274,7 @@
         private System.Windows.Forms.Label encryptedKtgsLabel;
         private System.Windows.Forms.CheckBox hidePasswordCheckbox;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
