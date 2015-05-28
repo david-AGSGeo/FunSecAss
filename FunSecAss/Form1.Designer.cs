@@ -45,6 +45,7 @@
             this.plaintextLabel = new System.Windows.Forms.Label();
             this.encryptedKtgsLabel = new System.Windows.Forms.Label();
             this.hidePasswordCheckbox = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // requestAuthenticationButton
@@ -68,9 +69,9 @@
             // 
             this.passwordTextBox.Location = new System.Drawing.Point(87, 36);
             this.passwordTextBox.Name = "passwordTextBox";
+            this.passwordTextBox.PasswordChar = '*';
             this.passwordTextBox.Size = new System.Drawing.Size(100, 20);
             this.passwordTextBox.TabIndex = 2;
-            this.passwordTextBox.PasswordChar = '*';
             // 
             // userNameLabel
             // 
@@ -200,11 +201,21 @@
             this.hidePasswordCheckbox.UseVisualStyleBackColor = true;
             this.hidePasswordCheckbox.CheckedChanged += new System.EventHandler(this.hidePasswordCheckbox_CheckedChanged);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(231, 124);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(491, 342);
+            this.button1.TabIndex = 17;
+            this.button1.Text = "Push Me David";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(762, 528);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.hidePasswordCheckbox);
             this.Controls.Add(this.encryptedKtgsLabel);
             this.Controls.Add(this.plaintextLabel);
@@ -250,6 +261,7 @@
         private System.Windows.Forms.Label plaintextLabel;
         private System.Windows.Forms.Label encryptedKtgsLabel;
         private System.Windows.Forms.CheckBox hidePasswordCheckbox;
+        private System.Windows.Forms.Button button1;
     }
 }
 
