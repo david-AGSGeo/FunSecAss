@@ -50,7 +50,7 @@ namespace FunSecAss
             }
             //ASreplyTextBox.Text = myAuthServer.authenticate().ToString();
 
-            //ASreplyTextBox.Text = password;
+            ////ASreplyTextBox.Text = password;
         }
 
         private void hidePasswordCheckbox_CheckedChanged(object sender, EventArgs e)
@@ -67,7 +67,9 @@ namespace FunSecAss
 
         private void button1_Click(object sender, EventArgs e)
         {
-            textBox1.Text = myAuthServer.myEncryptor.Encrypt("hello world, this is my test message", "testing1");
+            string s = myAuthServer.myEncryptor.Encrypt("hello world, this is my test message", "testing1");
+            textBox1.Text = s;
+            textBox1.Text += myAuthServer.myDecryptor.Decrypt(s, "testing1");
         }
 
         private void button2_Click(object sender, EventArgs e)
