@@ -12,31 +12,34 @@ namespace FunSecAss
 	{
 		
         //public string Key;
-        private List<char[]> blockList;
+        private List<char[]> PTblockList;
+        private List<char[]> ENCblockList;
         private static readonly int[] EncBytePbox = {3,5,1,4,7,0,2,6};
         private static readonly int[] EncColumnPbox = {2,0,3,1};
 
         public Encryptor()
         {
-            blockList = new List<char[]>();
+            PTblockList = new List<char[]>();
+            ENCblockList = new List<char[]>();
         }
         
         public string Encrypt(string message, string key)
         {
             
-            //string Encrypted = "";
+
             DividToBlocks(message);
-            //Console.WriteLine(blockList.ElementAt(0));
+
             BytePboxEncrypt();
 
-            return message;
+            return blockListToString();
+
         }
 
         private void DividToBlocks(string message)
         {
             int i = 0, j = 0;
 
-            blockList.Clear();
+            PTblockList.Clear();
             
             do
             {
@@ -48,8 +51,8 @@ namespace FunSecAss
                     else
                         temp[i] = '*';
                 }
-                blockList.Add(null);
-                blockList[j] = temp;
+                PTblockList.Add(null);
+                PTblockList[j] = temp;
                 //Console.WriteLine(blockList.ElementAt(j));
                 j++;
             }
@@ -60,19 +63,29 @@ namespace FunSecAss
 
         private void BytePboxEncrypt()
         {
-            char[] temp = new char[8];
-            foreach (char[] block in blockList)
+            
+            foreach (char[] block in PTblockList)
             {
-                   temp = block;
-                   Console.WriteLine(temp);
+                Console.WriteLine(block);
+                char[] temp = new char[8];              
                 for(int j = 0; j < 8; j++)
                 {
-                    temp = block;
-                    block[j] = temp[EncBytePbox[j]];
+                   temp[j] = block[EncBytePbox[j]];
                 }
-                Console.WriteLine(block);
+                ENCblockList.Add(temp);              
             }
 
+        }
+
+        private string blockListToString()
+        {
+            string retMessage = "";
+            foreach (char[] block in ENCblockList)
+            {
+                string tempString = new string(block);
+                retMessage += tempString;
+            }
+            return retMessage;
         }
 
 	}

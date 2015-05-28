@@ -67,7 +67,9 @@ namespace FunSecAss
 
         private void button1_Click(object sender, EventArgs e)
         {
-            textBox1.Text = myAuthServer.myEncryptor.Encrypt("hello world, this is my test message", "testing1");
+            string s = myAuthServer.myEncryptor.Encrypt("hello world, this is my test message", "testing1");
+            textBox1.Text = s;
+            textBox1.Text += myAuthServer.myDecryptor.Decrypt(s, "testing1");
         }
 
     }
