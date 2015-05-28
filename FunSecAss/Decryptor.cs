@@ -6,7 +6,18 @@ using System.Threading.Tasks;
 
 namespace FunSecAss
 {
-    class Decryptor
+    public class Decryptor
     {
+
+        public string Decrypt(string message, string key)
+        {
+
+            //string Encrypted = "";
+            //DividToBlocks(message);
+            //Console.WriteLine(blockList.ElementAt(0));
+            //BytePboxEncrypt();
+
+            return message;
+        }
     }
 }

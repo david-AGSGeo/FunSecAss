@@ -10,7 +10,14 @@ namespace FunSecAss
     
     public abstract class Server
     {
+        public Encryptor myEncryptor;
+        public Decryptor myDecryptor;
 
+        public Server() //generic server constructor
+        {
+            myEncryptor = new Encryptor();
+            myDecryptor = new Decryptor();
+        }
 
     }
 }

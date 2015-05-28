@@ -10,6 +10,9 @@ namespace FunSecAss
 {
     class AuthServer : Server
     {
+
+        public AuthServer() : base(){}
+
         public int authenticate()
         {
             string line = "";

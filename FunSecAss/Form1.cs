@@ -24,7 +24,7 @@ namespace FunSecAss
         {
             string userName = userNameTextBox.Text;
             string password = passwordTextBox.Text;
-            //myEncryptor = new Encryptor();
+            
 
             using (System.IO.StreamWriter AuthRequest = new System.IO.StreamWriter(@"AuthRequest.txt"))
             {
@@ -48,7 +48,7 @@ namespace FunSecAss
                     ASreplyTextBox.Text = "File corrupted";
                     break;
             }
-
+            plaintextTextBox.Text = myAuthServer.myEncryptor.Encrypt("hello world, this is my test message", "testing1");
             //ASreplyTextBox.Text = myAuthServer.authenticate().ToString();
 
             //ASreplyTextBox.Text = password;
