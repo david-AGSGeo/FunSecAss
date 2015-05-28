@@ -12,6 +12,7 @@ namespace FunSecAss
     {
         string ticket = "";
         string keyTGS = "";
+        string encryptedMessage = "";
 
         public AuthServer() : base(){}
 
@@ -58,7 +59,9 @@ namespace FunSecAss
                     {
                         generateTicket();
                         generateKeyTGS();
-                        //encrypt();
+                        writeTicketKeyTGSToFile();
+                        encryptMessage(password);
+                        writeEncrytedToFile();
                         
                     }
                     else
@@ -93,6 +96,41 @@ namespace FunSecAss
             keyTGS = keyGenerator();
 
             Console.WriteLine(keyTGS);
+        }
+
+        public void writeTicketKeyTGSToFile()
+        {
+            using (System.IO.StreamWriter ASTGSComms = new System.IO.StreamWriter(@"ASTGSComms.txt"))
+            {
+                ASTGSComms.WriteLine("Ticket: " + ticket);
+                ASTGSComms.WriteLine("KeyTGS: " + keyTGS);
+                ASTGSComms.Close();
+            }
+        }
+
+        public void writeEncrytedToFile()
+        {
+            using (System.IO.StreamWriter AuthReply = new System.IO.StreamWriter(@"AuthReply.txt"))
+            {
+                AuthReply.WriteLine("Encrypted Message: " + encryptedMessage);
+                AuthReply.Close();
+            }
+        }
+
+        public string encryptMessage(string password)
+        {
+            string message = "";
+            string key = "";
+
+            message += "Ticket: ";
+            message += ticket;
+            message += " KeyTGS: ";
+            message += keyTGS;
+
+            key += password;
+
+            encryptedMessage = myEncryptor.Encrypt(message, key);
+            return encryptedMessage;
         }
     }    
 }

@@ -13,11 +13,15 @@ namespace FunSecAss
     public partial class Form1 : Form
     {
         private AuthServer myAuthServer;
+        private Encryptor myEncryptor;
+        private Decryptor myDecryptor;
         
         public Form1()
         {
             InitializeComponent();
             myAuthServer = new AuthServer();
+            myEncryptor = new Encryptor();
+            myDecryptor = new Decryptor();
         }
 
         private void requestAuthenticationButton_Click(object sender, EventArgs e)
@@ -36,7 +40,10 @@ namespace FunSecAss
             switch(myAuthServer.authenticate())
             {
                 case 0:
-                    ASreplyTextBox.Text = "Success";
+                    //ASreplyTextBox.Text = "Success";
+                    //getAuthReply();
+                     string authReply = myDecryptor.Decrypt(getAuthReply(), password);
+                     splitAuthReply(authReply);
                     break;
                 case -1:
                     ASreplyTextBox.Text = "User Name doesn't exist";
@@ -48,6 +55,7 @@ namespace FunSecAss
                     ASreplyTextBox.Text = "File corrupted";
                     break;
             }
+            
             //ASreplyTextBox.Text = myAuthServer.authenticate().ToString();
 
             ////ASreplyTextBox.Text = password;
@@ -75,6 +83,67 @@ namespace FunSecAss
         private void button2_Click(object sender, EventArgs e)
         {
             myAuthServer.keyGenerator();
+        }
+
+        public string getAuthReply()
+        {
+            string line = "";
+            string error = "error";
+
+            System.IO.StreamReader AuthReply = new System.IO.StreamReader(@"AuthReply.txt");
+            while ((line = AuthReply.ReadLine()) != null)
+            {
+                if (line.StartsWith("Encrypted Message: "))
+                {
+                    line = line.Remove(0, 19);
+                    ASreplyTextBox.Text = line;
+                    return line;
+                }
+                else
+                {
+                    ASreplyTextBox.Text = "error";
+                    AuthReply.Close();
+                    return error;
+                }
+            }
+            AuthReply.Close();
+            return error;
+        }
+
+        public void splitAuthReply(string authReply)
+        {
+            string ticket = "";
+            string keyTGS = "";
+            string temp = "";
+            string temp1 = "";
+            
+            if (authReply.StartsWith("Ticket: "))
+            {
+                temp = authReply;
+                Console.WriteLine(temp); ;
+                temp1 = authReply;
+                temp = temp.Remove(0, 8);
+                temp = temp.Remove(9, 23);
+                ticket = temp;
+                ticketTextBox.Text = ticket;
+                temp1 = temp1.Remove(0, 17);
+                if(temp1.StartsWith("KeyTGS: "))
+                {
+                    temp1 = temp1.Remove(0, 8);
+                    keyTGS = temp1;
+                    KtgsTextBox.Text = keyTGS;
+                }
+                else
+                {
+                    keyTGS = "error";
+                    Console.WriteLine("error");
+                }
+            }
+            else
+            {
+                ticket = "error";
+                Console.WriteLine("error");
+            }
         }
 
     }
