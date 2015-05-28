@@ -98,6 +98,7 @@ namespace FunSecAss
                 string tempString = new string(block);
                 retMessage += tempString;
             }
+            retMessage = retMessage.TrimEnd('*');
             return retMessage;
         }
 

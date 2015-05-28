@@ -33,6 +33,8 @@ namespace FunSecAss
 
             ShiftRows(3);
 
+            MixColumns();
+
             return blockListToString();
 
         }
@@ -90,6 +92,11 @@ namespace FunSecAss
                 TempblockList.Add(temp);
             }
             ENCblockList = TempblockList;
+        }
+
+        private void MixColumns()
+        {
+
         }
 
         private string blockListToString()
