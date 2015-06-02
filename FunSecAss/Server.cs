@@ -18,7 +18,7 @@ namespace FunSecAss
         {
             myEncryptor = new Encryptor();
             myDecryptor = new Decryptor();
-            System.Threading.Thread.Sleep(1);
+            System.Threading.Thread.Sleep(100);
             rnd = new Random();
         }
 

@@ -8,5 +8,97 @@ namespace FunSecAss
 {
     class MailServer : Server
     {
+
+        string keyCS = "";
+        string keyTGSS = "";
+
+         public MailServer() : base(){}
+
+        public int authenticate()
+         {
+            string line = "";
+            string clientKeyCS = "";
+
+            getKeyCS();
+
+            System.IO.StreamReader MailServerRequest = new System.IO.StreamReader(@"MailServerRequest.txt");
+            while ((line = MailServerRequest.ReadLine()) != null)
+            {
+                if (line.StartsWith("KeyCS: "))
+                {
+                    clientKeyCS = line.Remove(0, 7);
+                    if (clientKeyCS == keyCS)
+                    {
+                        MailServerRequest.Close();
+                        return 0; //success
+                    }
+                    else
+                    {
+                        MailServerRequest.Close();
+                        return -1; //keys don't match
+                    }                    
+                }
+                else
+                {
+                    MailServerRequest.Close();
+                    return -2; //key doesn't exist
+                }
+            }
+            return -3; //file never read
+         }
+
+        private void getKeyCS()
+        {
+            string line = "";
+            string encryptedKeyCS = "";
+
+            //getKeyTGS();
+
+            System.IO.StreamReader TGSServerComms = new System.IO.StreamReader(@"TGSServerComms.txt");
+            while ((line = TGSServerComms.ReadLine()) != null)
+            {
+                if (line.StartsWith("KeyTGSS: "))
+                {
+                    keyTGSS = line.Remove(0, 9);
+                    Console.WriteLine("KeyTGSS: " + keyTGSS);
+
+                }                
+                else if (line.StartsWith("Encrypted Message: "))
+                {
+                    Console.WriteLine(line);
+                    encryptedKeyCS = line.Remove(0, 19);
+                    Console.WriteLine("Encrypted KeyCS: " + encryptedKeyCS);
+                }
+                else
+                {
+                    Console.WriteLine("error");
+                }
+            }
+
+            TGSServerComms.Close();
+
+            keyCS = myDecryptor.Decrypt(encryptedKeyCS, keyTGSS);
+            Console.WriteLine("KeyCS: " + keyCS);
+        }
+
+        //private void getKeyTGS()
+        //{
+        //    string line = "";
+
+        //    System.IO.StreamReader ASTGSComms = new System.IO.StreamReader(@"ASTGSComms.txt");
+        //    while ((line = ASTGSComms.ReadLine()) != null)
+        //    {
+        //        if (line.StartsWith("KeyTGS: "))
+        //        {
+        //            keyTGS = line.Remove(0, 8);
+        //        }
+        //        else
+        //        {
+        //            Console.WriteLine("error");
+        //        }
+        //    }
+
+        //    ASTGSComms.Close();
+        //}
     }
 }
