@@ -10,6 +10,7 @@ namespace FunSecAss
     {
         string keyCS = "";
         string keyTGS = "";
+        string keyTGSS = "";
 
 
         public TicketGrantingServer() : base(){}
@@ -17,8 +18,10 @@ namespace FunSecAss
         public void respondToClient()
         {
             string line = "";
-            string encryptedMessage = "";
-            
+            string encryptedMessageForClient = "";
+            string encryptedMessageForServer = "";
+
+            generateKeyTGSS();
             generateKeyCS();
 
             System.IO.StreamReader ASTGSComms = new System.IO.StreamReader(@"ASTGSComms.txt");
@@ -34,16 +37,24 @@ namespace FunSecAss
                 }
             }
             ASTGSComms.Close();
-            encryptedMessage = myEncryptor.Encrypt(keyCS, keyTGS);
-            writeEncryptedToFile(encryptedMessage);
-            writeEncryptedToFile1(encryptedMessage);
+            encryptedMessageForClient = myEncryptor.Encrypt(keyCS, keyTGS);
+            Console.WriteLine("KEYCS1: " + keyCS);
+            encryptedMessageForServer = myEncryptor.Encrypt(keyCS, keyTGSS);
+            Console.WriteLine("KEYCS2: " + keyCS);
+            Console.WriteLine("Client: " + encryptedMessageForClient);
+            Console.WriteLine("Server: " + encryptedMessageForServer);
+            writeEncryptedToFile(encryptedMessageForClient);
+            writeEncryptedToFile1(encryptedMessageForServer);
         }
         
-        
+        private void generateKeyTGSS()
+        {
+            keyTGSS = keyGenerator();
+        }
+
         public void generateKeyCS()
         {
             keyCS = keyGenerator();
-            Console.WriteLine("KeyCS: " + keyCS);
         }
 
         public void writeEncryptedToFile(string encryptedMessage)
@@ -59,6 +70,7 @@ namespace FunSecAss
         {
             using (System.IO.StreamWriter TGSServerComms = new System.IO.StreamWriter(@"TGSServerComms.txt"))
             {
+                TGSServerComms.WriteLine("KeyTGSS: " + keyTGSS);
                 TGSServerComms.WriteLine("Encrypted Message: " + encryptedMessage);
                 TGSServerComms.Close();
             }

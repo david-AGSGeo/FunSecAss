@@ -14,6 +14,7 @@ namespace FunSecAss
     {
         private AuthServer myAuthServer;
         private TicketGrantingServer myTicketGrantingServer;
+        private MailServer myMailServer;
         private Encryptor myEncryptor;
         private Decryptor myDecryptor;
         
@@ -22,6 +23,7 @@ namespace FunSecAss
             InitializeComponent();
             myAuthServer = new AuthServer();
             myTicketGrantingServer = new TicketGrantingServer();
+            myMailServer = new MailServer();
             myEncryptor = new Encryptor();
             myDecryptor = new Decryptor();
         }
@@ -47,8 +49,10 @@ namespace FunSecAss
                     string authReply = myDecryptor.Decrypt(getAuthReply(), password);
                     splitAuthReply(authReply);
                     encrypt();
+                    myTicketGrantingServer.respondToClient();
                     string DecryptedTGSReply = myDecryptor.Decrypt(getTGSReply(), KtgsTextBox.Text);
-                    showTGSReply(DecryptedTGSReply);                        
+                    showTGSReply(DecryptedTGSReply);
+                    button2.Enabled = true;    
                     break;
                 case -1:
                     ASreplyTextBox.Text = "User Name doesn't exist";
@@ -77,13 +81,7 @@ namespace FunSecAss
             }
         }
 
-
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            myAuthServer.keyGenerator();
-        }
-
+        
         public string getAuthReply()
         {
             string line = "";
@@ -96,6 +94,7 @@ namespace FunSecAss
                 {
                     line = line.Remove(0, 19);
                     ASreplyTextBox.Text = line;
+                    AuthReply.Close();
                     return line;
                 }
                 else
@@ -181,7 +180,6 @@ namespace FunSecAss
             string line = "";
             string error = "error";
 
-            myTicketGrantingServer.respondToClient();
 
             System.IO.StreamReader TGSReply = new System.IO.StreamReader(@"TGSReply.txt");
             while ((line = TGSReply.ReadLine()) != null)
@@ -206,6 +204,31 @@ namespace FunSecAss
         public void showTGSReply(string tgsReply)
         {
             textBox3.Text = tgsReply;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            using (System.IO.StreamWriter MailServerRequest = new System.IO.StreamWriter(@"MailServerRequest.txt"))
+            {
+                MailServerRequest.WriteLine("KeyCS: " + textBox3.Text);
+                MailServerRequest.Close();
+            }
+
+            switch(myMailServer.authenticate())
+            {
+                case 0:
+                    Console.WriteLine("Success");
+                    break;
+                case -1:
+                    Console.WriteLine("Key doesn't match");
+                    break;
+                case -2:
+                    Console.WriteLine("Key doesn't exist");
+                    break;
+                case -3:
+                    Console.WriteLine("file unable to read");
+                    break;
+            }
         }
 
 
