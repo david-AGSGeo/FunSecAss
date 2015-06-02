@@ -10,8 +10,9 @@ namespace FunSecAss
 {
 	public class Encryptor
 	{
-		
-        //public string Key;
+        
+
+
         private List<char[]> PTblockList;
         private List<char[]> ENCblockList;
         private static readonly int[] EncBytePbox = {3,5,1,4,7,0,2,6};
@@ -19,66 +20,82 @@ namespace FunSecAss
 
         public Encryptor()
         {
-            PTblockList = new List<char[]>();
-            ENCblockList = new List<char[]>();
+
         }
         
         public string Encrypt(string message, string key)
         {
+            PTblockList = new List<char[]>();
+            ENCblockList = new List<char[]>();
+            
+            DivideToBlocks(message);
+            for (int iter = 0; iter < 1; iter++)
+            {
+                ENCblockList.Clear();
+                displayBLtoConsole(PTblockList);
+                BytePboxEncrypt();
+
+                ShiftRows(3);
+
+                MixColumns();
+
+                XorWithKey(8, key.ToCharArray());
+
+                PTblockList = ENCblockList;
+            }
+            return blockListToString();
+
+
             
 
-            DivideToBlocks(message);
+        }
 
-            BytePboxEncrypt();
-
-            ShiftRows(3);
-
-            MixColumns();
-
-            XorWithKey(8, key);
-
-            return blockListToString();
+        private void displayBLtoConsole(List<char[]> blockList)
+        {
+            foreach (char[] block in blockList)
+            {
+                Console.WriteLine(block);
+            }
 
         }
 
         private void DivideToBlocks(string message)
         {
-            int i = 0, j = 0;
-
+            int j = 0;
             PTblockList.Clear();
             
             do
             {
+                
                 char[] temp = new char[8];
-                for (i = 0; i < 8; i++)
+                for (int i = 0; i < 8; i++)
                 {
                     if (i + (j * 8) < message.Length)
                         temp[i] = message[i + (j * 8)];
                     else
                         temp[i] = '*';
                 }
+                
                 PTblockList.Add(temp);
                 j++;
             }
-            while ((j * i) < message.Length);
-
-
+            while ((j * 8) < message.Length);
         }
 
         private void BytePboxEncrypt()
         {
-            
+            List<char[]> TempblockList = new List<char[]>();
             foreach (char[] block in PTblockList)
             {
-                Console.WriteLine(block);
+               
                 char[] temp = new char[8];              
                 for(int j = 0; j < 8; j++)
                 {
                    temp[j] = block[EncBytePbox[j]];
                 }
-                ENCblockList.Add(temp);              
+                TempblockList.Add(temp);              
             }
-
+            ENCblockList = TempblockList;
         }
 
         private void ShiftRows(int numShifts)
@@ -101,37 +118,24 @@ namespace FunSecAss
 
         }
 
-        private void XorWithKey(int iterations, string key)
+        private void XorWithKey(int iterations, char[] key)
         {
             List<char[]> SubKeyList = new List<char[]>();
             List<char[]> TempblockList = new List<char[]>();
-            char[] shortKey1, shortKey2, tempShortKey;
-            shortKey1 = key.Remove(4, 4).ToCharArray();
-            shortKey2 = key.Remove(0, 4).ToCharArray();
-            tempShortKey = new char[4];
-
-            for (int i = 0; i < iterations; i++)
-            {
-                char[] tempKey = shortKey1.Concat(shortKey2).ToArray();
-
-                for (int j = 0; j < 4; j++)
-                    tempShortKey[j] = (char)(shortKey1[j] ^ shortKey2[j]);
-
-                shortKey1 = shortKey2;
-                shortKey2 = tempShortKey;
-
-                SubKeyList.Add(tempKey);
-            }
-
+            
+            //Console.WriteLine("XOR Encrypt:");
             foreach (char[] block in ENCblockList)
             {
                 char[] tempBlock = new char[8];
-                foreach (char[] Subkey in SubKeyList)
-                {
-                    for (int j = 0; j < 8; j++)
-                        tempBlock[j] = (char)(block[j] ^ Subkey[j]);
-                }
+
+                for (int j = 0; j < 8; j++)
+                    tempBlock[j] = (char)((int)block[j] ^ (int)key[j]);
+
                 TempblockList.Add(tempBlock);
+                //Console.Write("Before XOR: ");
+                //Console.WriteLine(block);
+                //Console.Write("After XOR: ");
+                //Console.WriteLine(tempBlock);
             }
             ENCblockList = TempblockList;
         }

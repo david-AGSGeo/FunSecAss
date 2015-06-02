@@ -77,12 +77,7 @@ namespace FunSecAss
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string s = myAuthServer.myEncryptor.Encrypt("hello world, this is my test message", "testing1");
-            textBox1.Text = s;
-            textBox1.Text += myAuthServer.myDecryptor.Decrypt(s, "testing1");
-        }
+
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -211,6 +206,32 @@ namespace FunSecAss
         public void showTGSReply(string tgsReply)
         {
             textBox3.Text = tgsReply;
+        }
+
+
+
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            char[] ASCIIchars = new char[] 
+        { 
+           '\u0020', '\u263A', '\u263B', '\u2665', 
+           '\u2666', '\u2663', '\u2660', '\u2022', 
+           '\u25D8', '\u25CB', '\u25D9', '\u2642', 
+           '\u2640', '\u266A', '\u266B', '\u263C', 
+           '\u25BA', '\u25C4', '\u2195', '\u203C', 
+           '\u00B6', '\u00A7', '\u25AC', '\u21A8', 
+           '\u2191', '\u2193', '\u2192', '\u2190', 
+           '\u221F', '\u2194', '\u25B2', '\u25BC' 
+        };
+
+            textBox1.Text = "";
+            string s = myAuthServer.myEncryptor.Encrypt("hello world, this is my test message, but I want to test a longer message!", "testing1");
+            textBox1.Text = s;
+            textBox1.Text += "\r\n";
+            string s2 = myAuthServer.myDecryptor.Decrypt(s, "testing1");
+            textBox1.Text += s2;
         }
     }
 }

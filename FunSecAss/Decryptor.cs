@@ -13,20 +13,21 @@ namespace FunSecAss
         private static readonly int[] DecBytePbox = {5,2,6,0,3,1,7,4};
         private static readonly int[] DecColumnPbox = {1,3,0,2};
 
-                public Decryptor()
+        public Decryptor()
         {
-            PTblockList = new List<char[]>();
-            ENCblockList = new List<char[]>();
+
         }
 
 
         public string Decrypt(string message, string key)
         {
+            PTblockList = new List<char[]>();
+            ENCblockList = new List<char[]>();
 
             
             DivideToBlocks(message);
 
-            //XorWithKey(8, key);
+            XorWithKey(8, key.ToCharArray());
 
             MixColumns();
             
@@ -69,7 +70,7 @@ namespace FunSecAss
             List<char[]> TempblockList = new List<char[]>();
             foreach (char[] block in ENCblockList)
             {
-                Console.WriteLine(block);
+                //Console.WriteLine(block);
                 char[] temp = new char[8];              
                 for(int j = 0; j < 8; j++)
                 {
@@ -100,40 +101,27 @@ namespace FunSecAss
 
         }
 
-        private void XorWithKey(int iterations, string key)
+        private void XorWithKey(int iterations, char[] key)
         {
-            List<char[]> SubKeyList = new List<char[]>();
             List<char[]> TempblockList = new List<char[]>();
-            char[] shortKey1, shortKey2, tempShortKey;
-            shortKey1 = key.Remove(4,4).ToCharArray();
-            shortKey2 = key.Remove(0, 4).ToCharArray();
-            tempShortKey = new char[4];
             
-            for (int i = 0; i < iterations; i++)
-            {
-                //char[] tempKey = shortKey1 + shortKey2;
-                char[] tempKey = shortKey1.Concat(shortKey2).ToArray();
+            //Console.WriteLine("XOR Decrypt:");
 
-                for (int j = 0; j < 4; j++) 
-                    tempShortKey[j] = (char)(shortKey1[j] ^ shortKey2[j]);
-
-                shortKey1 = shortKey2;
-                shortKey2 = tempShortKey;
-
-                SubKeyList.Add(tempKey);
-            }
-
-            foreach (char[] block in ENCblockList)
-            {
-                char[] tempBlock = new char[8];
-                foreach (char[] Subkey in SubKeyList)
+                foreach (char[] block in ENCblockList)
                 {
+                    char[] tempBlock = new char[8];
                     for (int j = 0; j < 8; j++)
-                        tempBlock[j] = (char)(block[j] ^ Subkey[j]);
-                }
-                TempblockList.Add(tempBlock);
+                        tempBlock[j] = (char)((int)block[j] ^ (int)key[j]);
+
+                    TempblockList.Add(tempBlock);
+                    //Console.WriteLine("Before XOR: ");
+                    //Console.WriteLine(block);
+                    //Console.WriteLine("After XOR: ");
+                    //Console.WriteLine(tempBlock);
+                
+                ENCblockList = TempblockList;
             }
-            ENCblockList = TempblockList;
+                
         }
 
         private string blockListToString()
