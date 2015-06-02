@@ -112,7 +112,6 @@ namespace FunSecAss
 
             for (int i = 0; i < iterations; i++)
             {
-                //char[] tempKey = shortKey1 + shortKey2;
                 char[] tempKey = shortKey1.Concat(shortKey2).ToArray();
 
                 for (int j = 0; j < 4; j++)

@@ -18,12 +18,15 @@ namespace FunSecAss
         {
             myEncryptor = new Encryptor();
             myDecryptor = new Decryptor();
+            System.Threading.Thread.Sleep(1);
             rnd = new Random();
         }
 
         public string keyGenerator()
         {
             string key = "";
+            
+
             for (int i = 0; i < 8; i++)
             {                
                 int randomChar = rnd.Next(33, 126);
