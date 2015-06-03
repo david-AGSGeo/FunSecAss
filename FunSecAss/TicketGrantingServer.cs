@@ -37,11 +37,12 @@ namespace FunSecAss
                 }
             }
             ASTGSComms.Close();
+            Console.WriteLine("KeyCS: " + keyCS);
+            Console.WriteLine("KeyTGS: " + keyTGS);
+            Console.WriteLine("KEYTGSS: " + keyTGSS);
             encryptedMessageForClient = myEncryptor.Encrypt(keyCS, keyTGS);
-            Console.WriteLine("KEYCS1: " + keyCS);
+            Console.WriteLine("Client: " + encryptedMessageForClient);            
             encryptedMessageForServer = myEncryptor.Encrypt(keyCS, keyTGSS);
-            Console.WriteLine("KEYCS2: " + keyCS);
-            Console.WriteLine("Client: " + encryptedMessageForClient);
             Console.WriteLine("Server: " + encryptedMessageForServer);
             writeEncryptedToFile(encryptedMessageForClient);
             writeEncryptedToFile1(encryptedMessageForServer);

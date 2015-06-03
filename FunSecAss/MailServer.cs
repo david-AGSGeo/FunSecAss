@@ -52,7 +52,6 @@ namespace FunSecAss
             string line = "";
             string encryptedKeyCS = "";
 
-            //getKeyTGS();
 
             System.IO.StreamReader TGSServerComms = new System.IO.StreamReader(@"TGSServerComms.txt");
             while ((line = TGSServerComms.ReadLine()) != null)
@@ -81,24 +80,19 @@ namespace FunSecAss
             Console.WriteLine("KeyCS: " + keyCS);
         }
 
-        //private void getKeyTGS()
-        //{
-        //    string line = "";
-
-        //    System.IO.StreamReader ASTGSComms = new System.IO.StreamReader(@"ASTGSComms.txt");
-        //    while ((line = ASTGSComms.ReadLine()) != null)
-        //    {
-        //        if (line.StartsWith("KeyTGS: "))
-        //        {
-        //            keyTGS = line.Remove(0, 8);
-        //        }
-        //        else
-        //        {
-        //            Console.WriteLine("error");
-        //        }
-        //    }
-
-        //    ASTGSComms.Close();
-        //}
+        public string respondToClient()
+        {
+            string line = "";
+            string message= "";
+            
+            System.IO.StreamReader ClientServerComms = new System.IO.StreamReader(@"ClientServerComms.txt");
+            while ((line = ClientServerComms.ReadLine()) != null)
+            {
+                message += "I have received your message: ";
+                message += line;
+            }
+            ClientServerComms.Close();
+            return message;
+        }
     }
 }
