@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,13 +8,18 @@ using System.Threading.Tasks;
 
 using System.IO;
 
+
+
+
 namespace FunSecAss
 {
 	public class Encryptor
 	{
-        
+        private const int ITERATIONS = 8;
+
         private List<char[]> PTblockList;
         private List<char[]> ENCblockList;
+        private List<char[]> SubKeyList;
         private static readonly int[] EncBytePbox = {3,5,1,4,7,0,2,6};
         private static readonly int[] EncColumnPbox = {2,0,3,1};
 
@@ -25,6 +32,12 @@ namespace FunSecAss
         {
             PTblockList = new List<char[]>();
             ENCblockList = new List<char[]>();
+            SubKeyList = new List<char[]>();
+
+            GetSubKeys(ITERATIONS, key);
+            Console.WriteLine("Get the list of Subkeys for each iteration: ");
+            displayBLtoConsole(SubKeyList);
+            Console.WriteLine("");
             
             DivideToBlocks(message);
 
@@ -37,7 +50,7 @@ namespace FunSecAss
                 displayBLtoConsole(PTblockList);
                 Console.WriteLine("");
             }
-            for (int iter = 0; iter < 8; iter++)
+            for (int iter = 0; iter < ITERATIONS; iter++)
             {
                 ENCblockList.Clear();
 
@@ -59,7 +72,7 @@ namespace FunSecAss
                     Console.WriteLine("");
                 }
 
-                XorWithKey(8, key.ToCharArray());
+                XorWithKey(8, SubKeyList.ElementAt(iter));
                 
 
                 PTblockList = ENCblockList.ToList();
@@ -69,6 +82,30 @@ namespace FunSecAss
 
             
 
+        }
+
+
+        void GetSubKeys(int iterations, string key)
+        {
+            int numShifts = 1;
+            SubKeyList.Add(key.ToCharArray()); //first subkey is the key
+            for (int iter = 0; iter < ITERATIONS-1; iter++) //add ITERATIONS -1 subkeys
+            {
+                char[] temp = new char[8];
+                char[] newKey = new char[8];
+                char[] lastKey = SubKeyList.ElementAt(iter);
+
+                for (int i = 0; i < 8; i++) // temp is the last key right shifted by 1
+                {
+                    temp[i] = lastKey[(i + numShifts) % 8];
+                }
+
+                for (int j = 0; j < 8; j++) //the new subkey is the last subkey XORed with temp 
+                {
+                    newKey[j] = (char)((int)lastKey[j] ^ (int)temp[j]);
+                }
+                SubKeyList.Add(newKey);
+            }
         }
 
         private void displayBLtoConsole(List<char[]> blockList)
