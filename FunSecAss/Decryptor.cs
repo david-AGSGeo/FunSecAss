@@ -23,9 +23,13 @@ namespace FunSecAss
         {
             PTblockList = new List<char[]>();
             ENCblockList = new List<char[]>();
+            string myMessage = "";
+            foreach (char mychar in message)
+            {
+                myMessage += (char) ((int)mychar - 256);
+            }
 
-            
-            DivideToBlocks(message);
+            DivideToBlocks(myMessage);
 
             XorWithKey(8, key.ToCharArray());
 

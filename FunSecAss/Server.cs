@@ -30,6 +30,8 @@ namespace FunSecAss
             for (int i = 0; i < 8; i++)
             {                
                 int randomChar = rnd.Next(33, 126);
+                if (randomChar == '*') //replace asterisks as they may get trimmed by the decryptor!
+                    randomChar = '@'; 
                 char c = (char)randomChar;
                 key += c;
             }

@@ -20,7 +20,7 @@ namespace FunSecAss
 
         public Encryptor()
         {
-
+            //constructor currently empty :)
         }
         
         public string Encrypt(string message, string key)
@@ -145,7 +145,10 @@ namespace FunSecAss
             string retMessage = "";
             foreach (char[] block in ENCblockList)
             {
-                string tempString = new string(block);
+                char[] tempBlock = new char[8];
+                for (int j = 0; j < 8; j++)
+                    tempBlock[j] = (char)((int)block[j] + 256); //make sure unicode is outside control char range by adding 256 :)
+                string tempString = new string(tempBlock);
                 retMessage += tempString;
             }
             return retMessage;

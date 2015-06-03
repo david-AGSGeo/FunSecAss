@@ -121,7 +121,7 @@ namespace FunSecAss
                 
                 temp1 = authReply;
                 temp = temp.Remove(0, 8);
-                temp = temp.Remove(9, temp.Length-9);
+                temp = temp.Remove(9, (temp.Length-9));
                 ticket = temp;
                 ticketTextBox.Text = ticket;
                 temp1 = temp1.Remove(0, 17);
@@ -188,6 +188,7 @@ namespace FunSecAss
                 {
                     line = line.Remove(0, 19);
                     textBox2.Text = line;
+                    TGSReply.Close();
                     return line;
                 }
                 else
