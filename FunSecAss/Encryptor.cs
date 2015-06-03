@@ -11,8 +11,6 @@ namespace FunSecAss
 	public class Encryptor
 	{
         
-
-
         private List<char[]> PTblockList;
         private List<char[]> ENCblockList;
         private static readonly int[] EncBytePbox = {3,5,1,4,7,0,2,6};
@@ -20,26 +18,47 @@ namespace FunSecAss
 
         public Encryptor()
         {
-            //constructor currently empty :)
+            
         }
         
-        public string Encrypt(string message, string key)
+        public string Encrypt(string message, string key, bool debugFlag)
         {
             PTblockList = new List<char[]>();
             ENCblockList = new List<char[]>();
             
             DivideToBlocks(message);
+
+            if (debugFlag)
+            {
+                Console.WriteLine("********* ENCRYPTION ********");
+                Console.WriteLine("");
+                 
+                Console.WriteLine("message divided into 8 char blocks:");
+                displayBLtoConsole(PTblockList);
+                Console.WriteLine("");
+            }
             for (int iter = 0; iter < 1; iter++)
             {
                 ENCblockList.Clear();
-                //displayBLtoConsole(PTblockList);
+
                 BytePboxEncrypt();
+                if (debugFlag)
+                {
+                    Console.WriteLine("message blocks put through a P-Box (byte level):");
+                    displayBLtoConsole(ENCblockList);
+                    Console.WriteLine("");
+                }
 
-                ShiftRows(3);
+                ShiftRows();
+                if (debugFlag)
+                {
+                    Console.WriteLine("message blocks shifted by varying numbers (byte level):");
+                    displayBLtoConsole(ENCblockList);
+                    Console.WriteLine("");
+                }
 
-                MixColumns();
-
-                //XorWithKey(8, key.ToCharArray());
+                XorWithKey(8, key.ToCharArray());
+                
 
                 PTblockList = ENCblockList;
             }
@@ -98,9 +117,10 @@ namespace FunSecAss
             ENCblockList = TempblockList;
         }
 
-        private void ShiftRows(int numShifts)
+        private void ShiftRows()
         {
             List<char[]> TempblockList = new List<char[]>();
+            int numShifts = 1;
             foreach (char[] block in ENCblockList)
             {
                 char[] temp = new char[8];   
@@ -109,14 +129,11 @@ namespace FunSecAss
                     temp[i] = block[(i + numShifts) % 8];
                 }
                 TempblockList.Add(temp);
+                numShifts++;
             }
             ENCblockList = TempblockList;
         }
 
-        private void MixColumns()
-        {
-
-        }
 
         private void XorWithKey(int iterations, char[] key)
         {
@@ -143,11 +160,19 @@ namespace FunSecAss
         private string blockListToString()
         {
             string retMessage = "";
+            Console.WriteLine("message blocks XORed with key (bit level):");
+            Console.WriteLine("with 256 added to all Unicode chars in order to skip control chars");
+                 
             foreach (char[] block in ENCblockList)
             {
                 char[] tempBlock = new char[8];
                 for (int j = 0; j < 8; j++)
                     tempBlock[j] = (char)((int)block[j] + 256); //make sure unicode is outside control char range by adding 256 :)
+                
+
+                    Console.WriteLine(tempBlock);
+
+                
                 string tempString = new string(tempBlock);
                 retMessage += tempString;
             }

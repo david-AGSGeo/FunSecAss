@@ -8,6 +8,7 @@ namespace FunSecAss
 {
     public class Decryptor
     {
+        
         private List<char[]> PTblockList;
         private List<char[]> ENCblockList;
         private static readonly int[] DecBytePbox = {5,2,6,0,3,1,7,4};
@@ -19,25 +20,45 @@ namespace FunSecAss
         }
 
 
-        public string Decrypt(string message, string key)
+        public string Decrypt(string message, string key, bool debugFlag)
         {
             PTblockList = new List<char[]>();
             ENCblockList = new List<char[]>();
+            
             string myMessage = "";
-            foreach (char mychar in message)
+            foreach (char mychar in message) //drop the unicode chars back into the original range
             {
                 myMessage += (char) ((int)mychar - 256);
             }
 
+
             DivideToBlocks(myMessage);
 
-            //XorWithKey(8, key.ToCharArray());
+            XorWithKey(8, key.ToCharArray());
+            if (debugFlag)
+            {
+                Console.WriteLine("********* DECRYPTION ********");
+                Console.WriteLine("");
 
-            MixColumns();
-            
-            ShiftRows(3);
+                Console.WriteLine("message divided into 8 char blocks and XORed with key");
+                displayBLtoConsole(ENCblockList);
+                Console.WriteLine("");
+            }
+            ShiftRows();
+            if (debugFlag)
+            {
+                Console.WriteLine("Rows shifted left by varying ammounts:");
+                displayBLtoConsole(ENCblockList);
+                Console.WriteLine("");
+            }
             
             BytePboxDecrypt();
+            if (debugFlag)
+            {
+                Console.WriteLine("Rows put through reverse P-box:");
+                displayBLtoConsole(ENCblockList);
+                Console.WriteLine("");
+            }
 
             PTblockList = ENCblockList;
             return blockListToString();
@@ -85,24 +106,21 @@ namespace FunSecAss
             ENCblockList = TempblockList;
         }
 
-        private void ShiftRows(int numShifts)
+        private void ShiftRows()
         {
+            int numShifts = 1;
             List<char[]> TempblockList = new List<char[]>();
             foreach (char[] block in ENCblockList)
             {
                 char[] temp = new char[8];
                 for (int i = 0; i < 8; i++)
                 {
-                    temp[i] = block[((i + (8-numShifts)) % 8)];
+                    temp[i] = block[((((i + (8-numShifts)) % 8)+ 8)% 8 )];
                 }
                 TempblockList.Add(temp);
+                numShifts++;            //each block is shifted by a different ammount
             }
             ENCblockList = TempblockList;
-        }
-
-        private void MixColumns()
-        {
-
         }
 
         private void XorWithKey(int iterations, char[] key)
@@ -126,6 +144,15 @@ namespace FunSecAss
                 ENCblockList = TempblockList;
             }
                 
+        }
+
+        private void displayBLtoConsole(List<char[]> blockList)
+        {
+            foreach (char[] block in blockList)
+            {
+                Console.WriteLine(block);
+            }
+
         }
 
         private string blockListToString()

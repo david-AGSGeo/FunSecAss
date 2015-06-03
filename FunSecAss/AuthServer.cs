@@ -124,7 +124,7 @@ namespace FunSecAss
 
             key += password;
 
-            encryptedMessage = myEncryptor.Encrypt(message, key);
+            encryptedMessage = myEncryptor.Encrypt(message, key, false);
             return encryptedMessage;
         }
     }    
