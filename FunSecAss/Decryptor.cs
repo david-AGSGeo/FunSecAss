@@ -27,7 +27,7 @@ namespace FunSecAss
             
             DivideToBlocks(message);
 
-            XorWithKey(8, key.ToCharArray());
+            //XorWithKey(8, key.ToCharArray());
 
             MixColumns();
             

@@ -32,14 +32,14 @@ namespace FunSecAss
             for (int iter = 0; iter < 1; iter++)
             {
                 ENCblockList.Clear();
-                displayBLtoConsole(PTblockList);
+                //displayBLtoConsole(PTblockList);
                 BytePboxEncrypt();
 
                 ShiftRows(3);
 
                 MixColumns();
 
-                XorWithKey(8, key.ToCharArray());
+                //XorWithKey(8, key.ToCharArray());
 
                 PTblockList = ENCblockList;
             }

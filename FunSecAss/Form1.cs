@@ -217,6 +217,9 @@ namespace FunSecAss
             switch(myMailServer.authenticate())
             {
                 case 0:
+                    textBox4.Enabled = true;
+                    button3.Enabled = true;
+                    textBox5.Enabled = true;
                     Console.WriteLine("Success");
                     break;
                 case -1:
@@ -255,6 +258,16 @@ namespace FunSecAss
             textBox1.Text += "\r\n";
             string s2 = myAuthServer.myDecryptor.Decrypt(s, "testing1");
             textBox1.Text += s2;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            using (System.IO.StreamWriter ClientServerComms = new System.IO.StreamWriter(@"ClientServerComms.txt"))
+            {
+                ClientServerComms.WriteLine(textBox4.Text);
+                ClientServerComms.Close();
+            }
+            textBox5.Text = myMailServer.respondToClient();
         }
     }
 }
