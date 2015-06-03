@@ -34,33 +34,38 @@ namespace FunSecAss
 
             DivideToBlocks(myMessage);
 
-            XorWithKey(8, key.ToCharArray());
-            if (debugFlag)
+            for (int iter = 0; iter < 8; iter++)
             {
-                Console.WriteLine("********* DECRYPTION ********");
-                Console.WriteLine("");
 
-                Console.WriteLine("message divided into 8 char blocks and XORed with key");
-                displayBLtoConsole(ENCblockList);
-                Console.WriteLine("");
-            }
-            ShiftRows();
-            if (debugFlag)
-            {
-                Console.WriteLine("Rows shifted left by varying ammounts:");
-                displayBLtoConsole(ENCblockList);
-                Console.WriteLine("");
-            }
-            
-            BytePboxDecrypt();
-            if (debugFlag)
-            {
-                Console.WriteLine("Rows put through reverse P-box:");
-                displayBLtoConsole(ENCblockList);
-                Console.WriteLine("");
-            }
+                XorWithKey(8, key.ToCharArray());
 
-            PTblockList = ENCblockList;
+                if (debugFlag)
+                {
+                    Console.WriteLine("********* DECRYPTION ********");
+                    Console.WriteLine("");
+
+                    Console.WriteLine("message divided into 8 char blocks and XORed with key");
+                    displayBLtoConsole(ENCblockList);
+                    Console.WriteLine("");
+                }
+                ShiftRows();
+                if (debugFlag)
+                {
+                    Console.WriteLine("Rows shifted left by varying ammounts:");
+                    displayBLtoConsole(ENCblockList);
+                    Console.WriteLine("");
+                }
+
+                BytePboxDecrypt();
+                if (debugFlag)
+                {
+                    Console.WriteLine("Rows put through reverse P-box:");
+                    displayBLtoConsole(ENCblockList);
+                    Console.WriteLine("");
+                }
+
+                ENCblockList = PTblockList.ToList();
+            }
             return blockListToString();
         }
 
@@ -103,7 +108,7 @@ namespace FunSecAss
                 }
                 TempblockList.Add(temp);              
             }
-            ENCblockList = TempblockList;
+            PTblockList = TempblockList;
         }
 
         private void ShiftRows()

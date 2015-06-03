@@ -37,11 +37,12 @@ namespace FunSecAss
                 displayBLtoConsole(PTblockList);
                 Console.WriteLine("");
             }
-            for (int iter = 0; iter < 1; iter++)
+            for (int iter = 0; iter < 8; iter++)
             {
                 ENCblockList.Clear();
 
                 BytePboxEncrypt();
+                
                 if (debugFlag)
                 {
                     Console.WriteLine("message blocks put through a P-Box (byte level):");
@@ -50,6 +51,7 @@ namespace FunSecAss
                 }
 
                 ShiftRows();
+                
                 if (debugFlag)
                 {
                     Console.WriteLine("message blocks shifted by varying numbers (byte level):");
@@ -60,7 +62,7 @@ namespace FunSecAss
                 XorWithKey(8, key.ToCharArray());
                 
 
-                PTblockList = ENCblockList;
+                PTblockList = ENCblockList.ToList();
             }
             return blockListToString();
 
