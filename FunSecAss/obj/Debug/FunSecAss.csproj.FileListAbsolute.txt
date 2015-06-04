@@ -19,6 +19,7 @@ H:\trunk\FunSecAss\obj\Debug\FunSecAss.csproj.GenerateResource.Cache
 C:\Users\Sasa\Documents\FunSecAss\FunSecAss\bin\Debug\FunSecAss.exe.config
 C:\Users\Sasa\Documents\FunSecAss\FunSecAss\bin\Debug\FunSecAss.exe
 C:\Users\Sasa\Documents\FunSecAss\FunSecAss\bin\Debug\FunSecAss.pdb
+C:\Users\Sasa\Documents\FunSecAss\FunSecAss\obj\Debug\FunSecAss.csprojResolveAssemblyReference.cache
 C:\Users\Sasa\Documents\FunSecAss\FunSecAss\obj\Debug\FunSecAss.Form1.resources
 C:\Users\Sasa\Documents\FunSecAss\FunSecAss\obj\Debug\FunSecAss.Properties.Resources.resources
 C:\Users\Sasa\Documents\FunSecAss\FunSecAss\obj\Debug\FunSecAss.csproj.GenerateResource.Cache

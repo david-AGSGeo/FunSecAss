@@ -39,7 +39,7 @@ namespace FunSecAss
 
                 MixColumns();
 
-                //XorWithKey(8, key.ToCharArray());
+                XorWithKey(8, key.ToCharArray());
 
                 PTblockList = ENCblockList;
             }

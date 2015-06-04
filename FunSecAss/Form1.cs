@@ -32,7 +32,14 @@ namespace FunSecAss
         {
             string userName = userNameTextBox.Text;
             string password = passwordTextBox.Text;
-            
+
+            textBox4.Enabled = false;
+            textBox5.Enabled = false;
+            textBox6.Enabled = false;
+            button3.Enabled = false;
+            textBox4.Text = "";
+            textBox5.Text = "";
+            textBox6.Text = "";
 
             using (System.IO.StreamWriter AuthRequest = new System.IO.StreamWriter(@"AuthRequest.txt"))
             {
@@ -44,8 +51,6 @@ namespace FunSecAss
             switch(myAuthServer.authenticate())
             {
                 case 0:
-                    //ASreplyTextBox.Text = "Success";
-                    //getAuthReply();
                     string authReply = myDecryptor.Decrypt(getAuthReply(), password);
                     splitAuthReply(authReply);
                     encrypt();
@@ -64,9 +69,6 @@ namespace FunSecAss
                     ASreplyTextBox.Text = "File corrupted";
                     break;
             }
-            //ASreplyTextBox.Text = myAuthServer.authenticate().ToString();
-
-            ////ASreplyTextBox.Text = password;
         }
 
         private void hidePasswordCheckbox_CheckedChanged(object sender, EventArgs e)
@@ -221,6 +223,7 @@ namespace FunSecAss
                     textBox4.Enabled = true;
                     button3.Enabled = true;
                     textBox5.Enabled = true;
+                    textBox6.Enabled = true;
                     Console.WriteLine("Success");
                     break;
                 case -1:
@@ -234,10 +237,6 @@ namespace FunSecAss
                     break;
             }
         }
-
-
-
-
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -263,12 +262,19 @@ namespace FunSecAss
 
         private void button3_Click(object sender, EventArgs e)
         {
+            string message = "";
+            string encryptedMessage = "";
+
+            message = textBox4.Text;
+            encryptedMessage = myEncryptor.Encrypt(message, textBox3.Text);
+            
             using (System.IO.StreamWriter ClientServerComms = new System.IO.StreamWriter(@"ClientServerComms.txt"))
             {
-                ClientServerComms.WriteLine(textBox4.Text);
+                ClientServerComms.WriteLine("Encrypted Message: " + encryptedMessage);
                 ClientServerComms.Close();
             }
-            textBox5.Text = myMailServer.respondToClient();
+            textBox5.Text = encryptedMessage;
+            textBox6.Text = myMailServer.respondToClient();
         }
     }
 }

@@ -83,16 +83,20 @@ namespace FunSecAss
         public string respondToClient()
         {
             string line = "";
-            string message= "";
+            string encryptedMessage = "";
+            string originalMessage = "";
             
             System.IO.StreamReader ClientServerComms = new System.IO.StreamReader(@"ClientServerComms.txt");
             while ((line = ClientServerComms.ReadLine()) != null)
             {
-                message += "I have received your message: ";
-                message += line;
+                if (line.StartsWith("Encrypted Message: "))
+                {
+                    encryptedMessage = line.Remove(0, 19);
+                }
             }
             ClientServerComms.Close();
-            return message;
+            originalMessage = myDecryptor.Decrypt(encryptedMessage, keyCS);
+            return originalMessage;
         }
     }
 }
