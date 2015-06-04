@@ -40,9 +40,9 @@ namespace FunSecAss
             Console.WriteLine("KeyCS: " + keyCS);
             Console.WriteLine("KeyTGS: " + keyTGS);
             Console.WriteLine("KEYTGSS: " + keyTGSS);
-            encryptedMessageForClient = myEncryptor.Encrypt(keyCS, keyTGS);
-            Console.WriteLine("Client: " + encryptedMessageForClient);            
-            encryptedMessageForServer = myEncryptor.Encrypt(keyCS, keyTGSS);
+            encryptedMessageForClient = myEncryptor.Encrypt(keyCS, keyTGS, false);
+            Console.WriteLine("Client: " + encryptedMessageForClient);
+            encryptedMessageForServer = myEncryptor.Encrypt(keyCS, keyTGSS, false);
             Console.WriteLine("Server: " + encryptedMessageForServer);
             writeEncryptedToFile(encryptedMessageForClient);
             writeEncryptedToFile1(encryptedMessageForServer);

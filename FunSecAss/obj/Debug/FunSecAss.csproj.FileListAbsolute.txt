@@ -1,12 +1,3 @@
-E:\FunSecAss\FunSecAss\bin\Debug\FunSecAss.exe.config
-E:\FunSecAss\FunSecAss\bin\Debug\FunSecAss.exe
-E:\FunSecAss\FunSecAss\bin\Debug\FunSecAss.pdb
-E:\FunSecAss\FunSecAss\obj\Debug\FunSecAss.csprojResolveAssemblyReference.cache
-E:\FunSecAss\FunSecAss\obj\Debug\FunSecAss.Form1.resources
-E:\FunSecAss\FunSecAss\obj\Debug\FunSecAss.Properties.Resources.resources
-E:\FunSecAss\FunSecAss\obj\Debug\FunSecAss.csproj.GenerateResource.Cache
-E:\FunSecAss\FunSecAss\obj\Debug\FunSecAss.exe
-E:\FunSecAss\FunSecAss\obj\Debug\FunSecAss.pdb
 H:\trunk\FunSecAss\bin\Debug\FunSecAss.exe.config
 H:\trunk\FunSecAss\obj\Debug\FunSecAss.exe
 H:\trunk\FunSecAss\obj\Debug\FunSecAss.pdb
@@ -25,3 +16,12 @@ C:\Users\Sasa\Documents\FunSecAss\FunSecAss\obj\Debug\FunSecAss.Properties.Resou
 C:\Users\Sasa\Documents\FunSecAss\FunSecAss\obj\Debug\FunSecAss.csproj.GenerateResource.Cache
 C:\Users\Sasa\Documents\FunSecAss\FunSecAss\obj\Debug\FunSecAss.exe
 C:\Users\Sasa\Documents\FunSecAss\FunSecAss\obj\Debug\FunSecAss.pdb
+E:\FunSecAss\FunSecAss\bin\Debug\FunSecAss.exe.config
+E:\FunSecAss\FunSecAss\bin\Debug\FunSecAss.exe
+E:\FunSecAss\FunSecAss\bin\Debug\FunSecAss.pdb
+E:\FunSecAss\FunSecAss\obj\Debug\FunSecAss.csprojResolveAssemblyReference.cache
+E:\FunSecAss\FunSecAss\obj\Debug\FunSecAss.Form1.resources
+E:\FunSecAss\FunSecAss\obj\Debug\FunSecAss.Properties.Resources.resources
+E:\FunSecAss\FunSecAss\obj\Debug\FunSecAss.csproj.GenerateResource.Cache
+E:\FunSecAss\FunSecAss\obj\Debug\FunSecAss.exe
+E:\FunSecAss\FunSecAss\obj\Debug\FunSecAss.pdb

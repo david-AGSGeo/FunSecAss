@@ -76,7 +76,7 @@ namespace FunSecAss
 
             TGSServerComms.Close();
 
-            keyCS = myDecryptor.Decrypt(encryptedKeyCS, keyTGSS);
+            keyCS = myDecryptor.Decrypt(encryptedKeyCS, keyTGSS, false);
             Console.WriteLine("KeyCS: " + keyCS);
         }
 
