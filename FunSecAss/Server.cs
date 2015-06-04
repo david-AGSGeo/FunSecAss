@@ -22,6 +22,10 @@ namespace FunSecAss
             rnd = new Random();
         }
 
+        /// <summary>
+        /// generates a random 8 character key and raplaces asterisks with @ symbols as decryptor uses asterisks for padding.
+        /// </summary>
+        /// <returns>an 8 character key</returns>
         public string keyGenerator()
         {
             string key = "";

@@ -15,7 +15,14 @@ namespace FunSecAss
         string encryptedMessage = "";
 
         public AuthServer() : base(){}
-
+        /// <summary>
+        /// authenticates the user with the username and password enttered.
+        /// </summary>
+        /// <returns> returns 0 if successfully authenticates
+        ///           returns -1 if user doesn't exist
+        ///           returns -2 if password is incorrect
+        ///           returns -3 if file is corrupted
+        /// </returns>
         public int authenticate()
         {
             string line = "";
@@ -49,7 +56,7 @@ namespace FunSecAss
                     if(!userExists)
                     {
                         AuthRequest.Close();
-                        return -1;
+                        return -1; // user doesn't exist
                     }
                 }
                 else if (line.StartsWith("Password: "))

@@ -13,7 +13,14 @@ namespace FunSecAss
         string keyTGSS = "";
 
          public MailServer() : base(){}
-
+        /// <summary>
+        /// authenticates the communication between client and mail server
+        /// </summary>
+        /// <returns> returns 0 if successfully authenticated
+        ///           returns -1 if the keys don't match
+        ///           returns -2 if the key doesn't exist
+        ///           returns -3 if the file is corrupted
+        /// </returns>
         public int authenticate()
          {
             string line = "";
@@ -95,7 +102,7 @@ namespace FunSecAss
                 }
             }
             ClientServerComms.Close();
-            originalMessage = myDecryptor.Decrypt(encryptedMessage, keyCS);
+            originalMessage = myDecryptor.Decrypt(encryptedMessage, keyCS, false);
             return originalMessage;
         }
     }

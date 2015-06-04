@@ -219,22 +219,22 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(794, 10);
+            this.button1.Location = new System.Drawing.Point(226, 314);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(491, 342);
+            this.button1.Size = new System.Drawing.Size(508, 158);
             this.button1.TabIndex = 17;
-            this.button1.Text = "Push Me David";
+            this.button1.Text = "Debug Testing";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(794, 383);
+            this.textBox1.Location = new System.Drawing.Point(226, 501);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(491, 115);
+            this.textBox1.Size = new System.Drawing.Size(508, 148);
             this.textBox1.TabIndex = 18;
             // 
             // label1
@@ -365,7 +365,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1336, 688);
+            this.ClientSize = new System.Drawing.Size(766, 688);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.textBox6);
             this.Controls.Add(this.label5);
